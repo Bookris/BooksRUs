@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100&display=swap');
 
-$primary-color: green;
+$primary-color: pink;
 $secondary-color: black;
 
 body {
   background-color: $primary-color;
   font-family: 'Roboto', sans-serif;
-  font-size: 10px;
+  font-size: 50px;
   color: $secondary-color;
   display: flex;
   flex-direction: column;
