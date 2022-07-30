@@ -1,10 +1,12 @@
 const path = require('path');
 const express = require('express');
 const authRouter = require('./routers/authRouter.js');
+const bookRouter = require('./routers/bookRouter.js')
 const app = express();
 const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 //test server can work
 app.get('/test', (req, res) => res.send("i am okayyyyyyy'"))
@@ -16,7 +18,7 @@ app.use(express.static(path.join(__dirname, '../client/assets')));
 app.use('/auth', authRouter);
 
 // router: /search, /myshelf, 
-// app.use('/books', bookRouter);
+app.use('/books', bookRouter);
 
 // non-existing page err handler
 app.use((req, res) => res.status(404).send('You are looking for a page that doesn\'t exist...'));
