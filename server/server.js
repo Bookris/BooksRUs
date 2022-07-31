@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const authRouter = require('./routers/authRouter.js');
+const bookRouter = require('./routers/bookRouter.js');
 const app = express();
 const PORT = 3000;
 app.use(express.json());
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 app.use('/auth', authRouter);
 
 // router: /search, /myshelf,
-// app.use('/books', bookRouter);
+app.use('/books', bookRouter);
 
 // non-existing page err handler
 app.use((req, res) =>

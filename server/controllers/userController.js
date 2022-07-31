@@ -19,6 +19,23 @@ userController.login = async (req, res, next) => {
   //finds user 
   //if found return next
   //else return next(err)
+  //req.body should could contain email, password
+  const { email, password } = req.body;
+  // console.log('body?????', req.body);
+  await User.findOne({ email: email, password: password }) // frontend needs to know the query response format: null/user data
+    .then((data) => {
+      console.log("inside find", data);
+      if (data) {
+        res.locals.user = data;
+        // console.log('res!!!', data.username);
+        return next();
+      } else {
+        res.locals.user = null;
+        return next();
+      }
+    })
+    .catch((err) => next({ message: { err: 'user login err' } }));
 };
+
 
 module.exports = userController;
