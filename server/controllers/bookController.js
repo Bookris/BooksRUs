@@ -7,8 +7,7 @@ bookController.like = async (req, res, next) => {
   // get the req body of book isbn identifier
   const { email, bookData } = req.body;
   console.log("!!!", email, bookData)
-  // query db of user likedBooks property for this book: add to it or not add to it if exists
-  await User.findOne({ email: email })
+  await User.findOne({ email: email }).exec()
     .then(user => {
       const arrOfBooks = user.likedBooks;
       for (const book of arrOfBooks) {
@@ -22,7 +21,7 @@ bookController.like = async (req, res, next) => {
       //adding instance of book
       async function helper() {
         const likedBook = await Book.create({ name: bookData.name, description: bookData.description, isbn: bookData.isbn, imageUrl: bookData.imageUrl, moreInfo: bookData.moreInfo });
-        User.updateOne({ email: email }, { $push: { likedBooks: likedBook } })
+        User.updateOne({ email: email }, { $push: { likedBooks: likedBook } }).exec()
           .then((doc) => { console.log('!!!', doc) })
           .catch((err) => { console.log('update user likedbook err!!!') })
       };
@@ -32,6 +31,20 @@ bookController.like = async (req, res, next) => {
 }
 
 bookController.unLike = async (req, res, next) => {
+  // the book liked before
+  //req body would be {email, bookData}
+  const { email, isbn } = req.body
+  await User.findOneAndUpdate({ email: email }, { $pull: { likedBooks: { isbn: isbn } } }, { new: true }).exec()
+    .then(data => {
+      res.locals.data = data;
+    })
+    .catch(err => next({ message: { err: 'err in removing book from likes' } }))
+  // remvove the book from book collection
+  // remove the 
+  await Book.deleteOne({ isbn: isbn }).exec()
+    .then((doc) => { console.log(doc); return next() })
+    .catch((err) => next({ message: { err: 'err in delete on in Book' } }))
+
 
 }
 
