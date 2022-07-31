@@ -18,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /archive/],
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'],
@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         test: /.(css|scss)$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /archive/],
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {

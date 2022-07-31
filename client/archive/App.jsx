@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import React, { Component, Fragment } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   Link,
@@ -14,6 +13,7 @@ const App = () => {
   return (
     <div className='App'>
       <h1>Testing Render</h1>
+      <loginPage />
     </div>
   );
 };
