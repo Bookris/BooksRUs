@@ -1,17 +1,17 @@
 import * as React from 'react';
 import Comment from './Comments'
-class Book extends Component {
+class Book extends React.Component {
   constructor(props){
     super(props)
 
   }
   render() {
-    const comments = this.props.book.comments;
-    const commentsComponents = [];
-    for(let i = 0; i< comments.length; i++){
-    const currentComment = comments[i];
-    commentsComponents.push(<Comment comment={currentComment}/>);
-  }
+  //   const comments = this.props.book.comments;
+  //   const commentsComponents = [];
+  //   for(let i = 0; i< comments.length; i++){
+  //   const currentComment = comments[i];
+  //   commentsComponents.push(<Comment comment={currentComment}/>);
+  // }
     return (
       <div>
         <h4>Book Name: {this.props.book.name} </h4>
@@ -23,7 +23,7 @@ class Book extends Component {
           Comments:
           
           <div>
-            {commentsComponents}
+            {/* {commentsComponents} */}
           </div>
         </div>
       </div>
