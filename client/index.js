@@ -8,6 +8,7 @@ import Auth from './Auth';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Search from './pages/Search';
 import './assets/styles.scss';
 const rootElement = document.getElementById('root');
 
@@ -21,7 +22,7 @@ ReactDOM.render(
           <Route path="register" element={<Register />} />
         </Route>
         <Route path='/profile' element={<Profile />} />
-        <Route path='/search' element={<Profile />} />
+        <Route path='/search' element={<Search />} />
         <Route
           path="*"
           element={
