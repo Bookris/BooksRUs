@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+
 * {
     margin: 0;
     padding: 0;
@@ -39,6 +40,8 @@ body {
     margin-bottom: 5px;
 }
 
+
+
 .wrapper .header .form .input_field .input {
     width: 100%;
     background: #efefef;
@@ -55,12 +58,13 @@ body {
 }
 
 .wrapper .header .form .btn {
-    margin: 10px 0;
     background: #3897f0;
-    border: 1px solid #3897f0;
-    border-radius: 4px;
+    border: .5px solid #3897f0;
+    // border-radius: 1px;
     text-align: center;
     padding: 5px;
+    cursor: pointer;
+    color: white;
 }
 
 .wrapper .header .form .btn a {
@@ -161,4 +165,8 @@ body {
 
 .wrapper .footer .copyright {
     color: #999;
+}
+
+.top_form {
+    margin-bottom: 30px;
 }

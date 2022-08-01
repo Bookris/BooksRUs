@@ -1,0 +1,27 @@
+
+
+
+
+export default function search() {
+  // create a search box
+
+
+  // start an api query
+
+
+  //display the response from api
+
+
+  // the book have like button and unlike button
+
+  return (
+    <div>
+      <input type='text' id="search" ></input>
+      <label htmlFor="search"></label>
+    </div>
+
+  )
+
+}
+
+
