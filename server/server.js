@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
   // call Object.Assign, for the user defined middleware err to overwrite our default err
   const errorObject = Object.assign({}, defaultErr, err); // { message: { err: 'user registered err' } }
   // console.log err
-  console.log(errorObject.log);
+  // console.log(errorObject.log);
   // return to the user directly, not next()
   return res.status(errorObject.status).json(errorObject.message);
 });

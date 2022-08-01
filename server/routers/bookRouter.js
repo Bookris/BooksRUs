@@ -10,7 +10,7 @@ const bookController = require('../controllers/bookController');
 // frontend work
 
 //should send the isbn of the book so it can be identified. also should send back the user email as well to identify where to add liked book
-router.post('/like', bookController.like, (req, res) => res.status(200).json({}));
+router.post('/like', bookController.like, (req, res) => res.status(200).json(res.locals.data));
 
 router.post('/unLike', bookController.unLike, (req, res) => res.status(200).json(res.locals.data));
 

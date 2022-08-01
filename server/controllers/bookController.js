@@ -6,7 +6,7 @@ const bookController = {};
 bookController.like = async (req, res, next) => {
   // get the req body of book isbn identifier
   const { email, bookData } = req.body;
-  console.log("!!!", email, bookData)
+  console.log("!!! request body", email, bookData)
   await User.findOne({ email: email }).exec()
     .then(user => {
       const arrOfBooks = user.likedBooks;
@@ -14,20 +14,26 @@ bookController.like = async (req, res, next) => {
         // check book.isbn, if find, return
         if (book.isbn === bookData.isbn) {
           console.log('book is already liked');
-          //res.locals.data = user; // $$$ frontend needs to know this
+          res.locals.data = user; // $$$ frontend needs to know this
           return next();
         }
       }
       //adding instance of book
       async function helper() {
         const likedBook = await Book.create({ name: bookData.name, description: bookData.description, isbn: bookData.isbn, imageUrl: bookData.imageUrl, moreInfo: bookData.moreInfo });
-        User.updateOne({ email: email }, { $push: { likedBooks: likedBook } }).exec()
-          .then((doc) => { console.log('!!!', doc) })
-          .catch((err) => { console.log('update user likedbook err!!!') })
+        const data = await User.updateOne({ email: email }, { $push: { likedBooks: likedBook } }).exec()
+          .then((doc) => { console.log(doc) }) // 
+          .catch((err) => { console.log('update user likedbook err!!!') });
+
+        const updatedUser = await User.findOne({ email: email });
+        // console.log('iam updateduer!!!!!!!', updatedUser);
+        res.locals.data = updatedUser;
       };
+
       helper()
       return next();
     })
+    .catch((err) => next({ message: { err: 'err in booklike controller' } }));
 }
 
 bookController.unLike = async (req, res, next) => {

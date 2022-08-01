@@ -1,54 +1,51 @@
 import * as React from 'react';
 import Comment from './Comments'
 import { useStoreState, useStoreActions } from 'easy-peasy';
-class Book extends React.Component {
-  constructor(props) {
-    super(props)
+export default function Book(props) {
+
+  //import user from store
+  //fetch req to /like. body should be email and bookdata {name, description,isbn,imgUrl, moreInfo}. probably need to refactor post('/like ) to fit w frontend  
+  const user = useStoreState((state) => state.user);
+  const updateUser = useStoreActions((actions) => actions.updateUser);
+  const likedBooks = useStoreState((state) => state.userLikedBooks);
+  const updateLikedBooks = useStoreActions((actions) => actions.updateLikedBooks);
+  const imageUrls = Object.values(props.book.volumeInfo.imageLinks);
+  const bookData = {
+    name: props.book.volumeInfo.title,
+    description: props.book.volumeInfo.description,
+    isbn: props.book.volumeInfo.industryIdentifiers[1].identifier,
+    imageUrl: imageUrls[0],
+    moreInfo: props.book.volumeInfo.infoLink
+  }
+
+  async function handleLike(event) {
+    // console.log('user????', user);
+
+    const sendingInfo = { email: user.email, bookData: bookData };
+    const result = await fetch('/books/like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(sendingInfo)
+    })
+      .then((data) => data.json())
+      .then((data) => console.log(data)/*updateUser(data)*/)
+      // .then((data) => updateUser(data))
+      .catch(err => console.log('error in /books/like'))
 
   }
-  render() {
-    // const comments = this.props.book.comments;
-    // const commentsComponents = [];
-    // for (let i = 0; i < comments.length; i++) {
-    //   const currentComment = comments[i];
-    //   commentsComponents.push(<Comment comment={currentComment} />);
-    // }
 
-    //import user from store
-    //fetch req to /like. body should be email and bookdata {name, description,isbn,imgUrl, moreInfo}. probably need to refactor post('/like ) to fit w frontend  
-    const user = useStoreState((state) => state.user);
-    const bookData = {
-      name: this.props.book.volumeInfo.title,
-      description: this.props.book.volumeInfo.description,
-      isbn: this.props.book.volumeInfo.industryIdentifiers[1].identifier,
-      imageUrl: Object.values(this.props.book.volumeInfo.imageLinks),
-      moreInfo: this.props.book.volumeInfo.infoLink
-    }
 
-    const image = Object.values(this.props.book.volumeInfo.imageLinks);
-    return (
-      <div>
-        <h4>Book Name: {bookData.name} </h4>
-        <img src={bookData.imageUrl} />
-        <h4>ISBN-10: {bookData.isbn}</h4>
+  return (
+    <div>
+      <h4>Book Name: {bookData.name} </h4>
+      <img src={imageUrls[0]} />
+      <h4>ISBN-10: {bookData.isbn}</h4>
 
-        <h4>Description: {bookData.description}</h4>
-        <a href={bookData.moreInfo}>More Info</a>
-        <button> Like</button>
-        <br></br>
+      <h4>Description: {bookData.description}</h4>
+      <a href={bookData.moreInfo}>More Info</a>
+      <button onClick={handleLike}> Like</button>
+      <br></br>
 
-        {/* <button onClick={(e) => queryComments(e.target.value)}> Comments</button>
-        display old comments in our database associated with this book
-        add comment to this book 
-        <div> Comments:
-
-          <div>
-            {commentsComponents}
-          </div>
-
-        </div> */}
-      </div >
-    )
-  }
+    </div >
+  )
 }
-export default Book;

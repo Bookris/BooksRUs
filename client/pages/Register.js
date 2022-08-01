@@ -11,28 +11,24 @@ export default function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     // request to /auth/login
-    const data = await fetch('/auth/login', {
+    const data = await fetch('/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        username,
-        username,
-      }),
+      body: JSON.stringify({ username: username, email: email, password: password }),
+
     })
       .then((resp) => resp.json())
-      .catch((err) => console.log('error in /auth/login'));
+      .catch((err) => console.log('error in /auth/register'));
 
     if (data === null) {
       //tell user that login credentials were wrong
       console.log('invalid credentials');
     } else {
-      updateUser(data); //updates our global state
-      navigate('/profile', { replace: true }); //navigates to profile if login was successful
+
+      navigate('/auth/login', { replace: true }); //navigates to profile if login was successful
     }
   }
-
+  const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -45,8 +41,13 @@ export default function Register() {
 
           <div className='form'>
             <form className='login-form' onSubmit={handleSubmit}>
-              <div className='input_field'>
-                <label htmlFor='username'>Username</label>
+
+              <div className='input_field' >
+                <label htmlFor='email'>Username</label>
+
+              {/* <div className='input_field'>
+                <label htmlFor='username'>Username</label> */}
+
 
                 <div className='input_box'></div>
                 <input

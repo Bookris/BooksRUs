@@ -1,7 +1,9 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Book from '../components/Book.js'
 import Nav from '../components/Nav.js'
+
+
+
 export default function search() {
   // create a search box
   // start an api query
@@ -48,17 +50,33 @@ export default function search() {
 
   return (
 
-    <div>
-      <Nav />
-      <h1>search page</h1>
-      <form>
-        <input type='text' id="search" ></input>
-        <label htmlFor="search"></label>
-        <button type='button' onClick={() => { queryBooks(document.getElementById('search').value) }}>search</button>
-      </form>
-      {books}
+    <div className='searchBody'>
 
-    </div >
+      <h1 className='searchbar'>Search for a book!</h1>
+      <form className='searchbar'>
+        <input type='text' id="search" placeholder='My favorite title'></input>
+        <label htmlFor="search"></label>
+        <button className='search-button' type='button' onClick={() => { queryBooks(document.getElementById('search').value) }}>Search</button>
+      </form>
+
+
+
+      <div className='favorite_books'>
+        <div class="card text-center">
+          <div class="card-body">
+            <h3 class="card-title">Results</h3>
+            <p class="card-text"></p>
+            {books}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
 
   )
 

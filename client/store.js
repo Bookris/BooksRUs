@@ -5,8 +5,12 @@ const store = createStore({
   updateUser: action((state, payload) => {
     state.user = payload;
   }),
-  logout: action((state,payload) => {
+  logout: action((state, payload) => {
     state.user = {};
+  }),
+  userLikedBooks: [],
+  updateLikedBooks: action((state, payload) => {
+    state.userLikedBooks = payload;
   })
 }, // model
   { devTools: true } //config
