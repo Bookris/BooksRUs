@@ -11,6 +11,8 @@ export default function Profile() {
       <h3>Email: {user.email}</h3>
       <h2>--Liked Books--</h2>
 
+
+
     </div>
   )
 }
