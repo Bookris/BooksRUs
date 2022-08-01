@@ -1,34 +1,54 @@
 import * as React from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import Book from '../components/Book';
+import ProfileBooks from '../components/booksForProfile';
+
+
 export default function Profile() {
   const user = useStoreState((state) => state.user);
   const logoutUser = useStoreActions((actions) => actions.logout);
   let navigate = useNavigate();
   const likedBooks = user.likedBooks;
-  const likedBookComponents = []
+  const likedBooksComponents = []
   for (let i = 0; i < likedBooks.length; i++) {
     const currentBook = likedBooks[i];
-    likedBooksComponents.push(<Book book={currentBook} />);
+    likedBooksComponents.push(<ProfileBooks book={currentBook} key={i} />);
   }
   return (
-    <div>
-      <h1>Profile</h1>
-      <h3>User: {user.username}</h3>
-      <h3>Email: {user.email}</h3>
-      <button onClick={() => {
-        logoutUser(user);
-        navigate("/auth/login", { replace: true });
-      }}>Logout</button>
-      <button onClick={() => navigate("/search", { replace: true })}> Search</button>
-      <h2>--Liked Books--</h2>
+
+    <div className='user-profile'>
+
+      <button className='searchbtn_profile' onClick={() => navigate("/search", { replace: true })}> Search</button>
+
+
       <div>
-        {'where book components will be located'}
-        {likedBookComponents}
+        <div class="card text-center">
+          <div class="card-body">
+            <h3 class="card-title">User Profile</h3>
+            <p class="card-text">User: {user.username}</p>
+            <p class="card-text">Email: {user.email}</p>
+          </div>
+        </div>
       </div>
 
 
-    </div>
+
+
+      <div className='favorite_books'>
+        <div class="card text-center">
+          <div class="card-body">
+            <h3 class="card-title">My Favorite Books</h3>
+            <p class="card-text">View all your favorite books in one place!</p>
+            {likedBooksComponents}
+          </div>
+        </div>
+      </div>
+
+
+    </div >
+
+
+
+
   )
 } 
