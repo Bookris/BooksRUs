@@ -14,7 +14,12 @@ export default function Register() {
     const data = await fetch('/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        username,
+        username,
+      }),
     })
       .then((resp) => resp.json())
       .catch((err) => console.log('error in /auth/login'));
@@ -30,6 +35,7 @@ export default function Register() {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState('');
 
   return (
     <div className='wrapper'>
@@ -40,14 +46,14 @@ export default function Register() {
           <div className='form'>
             <form className='login-form' onSubmit={handleSubmit}>
               <div className='input_field'>
-                <label htmlFor='email'>Username</label>
+                <label htmlFor='username'>Username</label>
 
                 <div className='input_box'></div>
                 <input
-                  id=' email'
+                  id='username'
                   placeholder='John Smith'
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setUsername(e.target.value);
                   }}
                 ></input>
               </div>
