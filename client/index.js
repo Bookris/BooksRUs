@@ -21,6 +21,7 @@ ReactDOM.render(
           <Route path="register" element={<Register />} />
         </Route>
         <Route path='/profile' element={<Profile />} />
+        <Route path='/search' element={<Profile />} />
         <Route
           path="*"
           element={
@@ -34,5 +35,5 @@ ReactDOM.render(
       </Routes>
     </HashRouter>
   </StoreProvider>
-  , rootElement
+  , rootElement // the big container
 );  
