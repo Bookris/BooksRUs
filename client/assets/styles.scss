@@ -19,12 +19,12 @@
 }
 
 body {
-    background-color: #F9f6ed;
+    background-color: #fff;
     font-size: 14px;
 }
 
 .container-fluid {
-    background-color: #F9f6ed;
+    // background-color: #F9f6ed;
 }
 
 .navbar-nav {
@@ -239,10 +239,28 @@ img {
     border-radius: 1px;
     text-align: center;
     padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.searchbtn_profile:hover {
+    background-color: #C1E1C1;
+}
+
 
 .searchbar {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.jumbotron {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerbtn {
+    margin-right: 50px;
 }
