@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { schema } = require("webpack-dev-server");
-const MONGO_URI = `mongodb+srv://hmu1540:Gt7130mhm%40%40@cluster0.8mkig.mongodb.net/?retryWrites=true&w=majority`;
+const {password} = require('../secrets')
+const MONGO_URI = `mongodb+srv://username:${password}@booksrus-2.zrev2wj.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI
   useNewUrlParser: true,
