@@ -44,7 +44,7 @@ export default function Register() {
 
                 <div className='input_box'></div>
                 <input
-                  id=' email'
+                  id=' username'
                   placeholder='John Smith'
                   onChange={(e) => {
                     setUsername(e.target.value);
@@ -67,7 +67,7 @@ export default function Register() {
 
               <br></br>
               <div className='input_field'>
-                <label for='password'>Password</label>
+                <label htmlFor='password'>Password</label>
 
                 <div className='input_box'>
                   <input

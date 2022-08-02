@@ -24,26 +24,26 @@ export default function () {
           <a onClick={() => navigate('/search', { replace: true })}>Search</a>
         </div> */}
 
-        <a class="navbar-brand" href="#">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <a className="navbar-brand" href="#">Home</a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
 
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" onClick={() => {
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" onClick={() => {
                 logoutUser(user);
                 navigate("/auth/login", { replace: true });
               }} >Login</a>
 
             </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick={() => navigate("/profile", { replace: true })}>Profile</a>
+            <li className="nav-item">
+              <a className="nav-link" onClick={() => navigate("/profile", { replace: true })}>Profile</a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" onClick={() => {
+            <li className="nav-item">
+              <a className="nav-link" onClick={() => {
                 logoutUser(user);
                 navigate("/auth/login", { replace: true });
               }} >Logout</a>

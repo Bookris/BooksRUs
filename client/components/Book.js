@@ -20,17 +20,24 @@ export default function Book(props) {
     moreInfo: props.book.volumeInfo.infoLink
   }
 
+  console.log('bookdata: ', bookData)
+
   async function handleLike(event) {
     // console.log('user????', user);
 
     const sendingInfo = { email: user.email, bookData: bookData };
+    console.log('sending info: ',sendingInfo);
     const result = await fetch('/books/like', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(sendingInfo)
     })
       .then((data) => data.json())
-      .then((data) => console.log(data)/*updateUser(data)*/)
+      .then(async (data) => {
+        console.log('returned data ',data);
+        await updateLikedBooks(data);
+        console.log('liked books ',likedBooks);
+      }/*updateUser(data)*/)
       // .then((data) => updateUser(data))
       .catch(err => console.log('error in /books/like'))
 

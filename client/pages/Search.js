@@ -62,10 +62,10 @@ export default function search() {
 
 
       <div className='favorite_books'>
-        <div class="card text-center">
-          <div class="card-body">
-            <h3 class="card-title">Results</h3>
-            <p class="card-text"></p>
+        <div className="card text-center">
+          <div className="card-body">
+            <h3 className="card-title">Results</h3>
+            <p className="card-text"></p>
             {books}
           </div>
         </div>

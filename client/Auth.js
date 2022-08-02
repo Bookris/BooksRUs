@@ -17,15 +17,15 @@ class Auth extends Component {
           <Link to='register'>Register</Link>
         </nav> */}
         <div >
-          <div class="jumbotron" >
+          <div className="jumbotron" >
             <div className='homeinfo'>
-              <h1 class="display-4">BooksRUs</h1>
-              <p class="lead">Build a library of your own!</p>
+              <h1 className="display-4">BooksRUs</h1>
+              <p className="lead">Build a library of your own!</p>
               <br></br>
               <p>Search and discover new books catered to your personal taste. Register now to start.</p>
             </div>
-            <p class="lead">
-              <a className='registerbtn' class="btn btn-primary btn-lg" href="/#/auth/register" role="button">Register</a>
+            <p className="lead">
+              <a className="btn btn-primary btn-lg" href="/#/auth/register" role="button">Register</a>
             </p>
 
             {/* <img src='cat.jpg' alt='cat' class="img-thumbnail"></img> */}

@@ -22,11 +22,11 @@ export default function Profile() {
 
 
       <div>
-        <div class="card text-center">
-          <div class="card-body">
-            <h3 class="card-title">User Profile</h3>
-            <p class="card-text">User: {user.username}</p>
-            <p class="card-text">Email: {user.email}</p>
+        <div className="card text-center">
+          <div className="card-body">
+            <h3 className="card-title">User Profile</h3>
+            <p className="card-text">User: {user.username}</p>
+            <p className="card-text">Email: {user.email}</p>
           </div>
         </div>
       </div>
@@ -35,10 +35,10 @@ export default function Profile() {
 
 
       <div className='favorite_books'>
-        <div class="card text-center">
-          <div class="card-body">
-            <h3 class="card-title">My Favorite Books</h3>
-            <p class="card-text">View all your favorite books in one place!</p>
+        <div className="card text-center">
+          <div className="card-body">
+            <h3 className="card-title">My Favorite Books</h3>
+            <p className="card-text">View all your favorite books in one place!</p>
             {likedBooksComponents}
           </div>
         </div>

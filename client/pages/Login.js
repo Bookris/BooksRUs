@@ -8,6 +8,7 @@ export default function Login() {
   const updateUser = useStoreActions((actions) => actions.updateUser);
 
   let navigate = useNavigate();
+  
   async function handleSubmit(event) {
     event.preventDefault();
     // request to /auth/login
@@ -55,7 +56,7 @@ export default function Login() {
 
               <br></br>
               <div className='input_field'>
-                <label for='password'>Password</label>
+                <label htmlFor='password'>Password</label>
 
                 <div className='input_box'>
                   <input className='input_box' type="password" id='password' placeholder='Password' onChange={e => { setPassword(e.target.value) }}></input>

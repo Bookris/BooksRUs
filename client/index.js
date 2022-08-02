@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { HashRouter, BrowserRouter, Routes, Route } from 'react-router-dom';
 import store from './store';
 import { StoreProvider } from 'easy-peasy';
@@ -13,9 +13,9 @@ import './assets/styles.scss';
 const rootElement = document.getElementById('root');
 import Nav from './components/Nav';
 
-ReactDOM.render(
+render(
   <StoreProvider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <Nav />
       <Routes>
         <Route path='/' element={<App />} />
@@ -39,7 +39,7 @@ ReactDOM.render(
         <Route path='/books' />
 
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </StoreProvider>
   , rootElement // the big container
 );  
