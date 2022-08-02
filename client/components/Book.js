@@ -9,12 +9,14 @@ export default function Book(props) {
   const updateUser = useStoreActions((actions) => actions.updateUser);
   const likedBooks = useStoreState((state) => state.userLikedBooks);
   const updateLikedBooks = useStoreActions((actions) => actions.updateLikedBooks);
-  const imageUrls = Object.values(props.book.volumeInfo.imageLinks);
+  const imageUrl = props.book.volumeInfo.imageLinks ? Object.values(props.book.volumeInfo.imageLinks)[0] : "not found";
+  const isbn = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].identifier : props.book.volumeInfo.industryIdentifiers[0].identifier
+  const isbn_type = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].type : props.book.volumeInfo.industryIdentifiers[0].type
   const bookData = {
     name: props.book.volumeInfo.title,
     description: props.book.volumeInfo.description,
-    isbn: props.book.volumeInfo.industryIdentifiers[1].identifier,
-    imageUrl: imageUrls[0],
+    isbn: isbn, // props.book.volumeInfo.industryIdentifiers[1].identifier,
+    imageUrl: imageUrl,
     moreInfo: props.book.volumeInfo.infoLink
   }
 
@@ -34,12 +36,11 @@ export default function Book(props) {
 
   }
 
-
   return (
     <div>
       <h4>Book Name: {bookData.name} </h4>
-      <img src={imageUrls[0]} />
-      <h4>ISBN-10: {bookData.isbn}</h4>
+      <img src={bookData.imageUrl} />
+      <h4>{isbn_type}: {bookData.isbn}</h4>
 
       <h4>Description: {bookData.description}</h4>
       <a href={bookData.moreInfo}>More Info</a>
