@@ -15,7 +15,6 @@ export default function Register() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username, email: email, password: password }),
-
     })
       .then((resp) => resp.json())
       .catch((err) => console.log('error in /auth/register'));
@@ -31,7 +30,6 @@ export default function Register() {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [username, setUsername] = React.useState('');
 
   return (
     <div className='wrapper'>
@@ -41,17 +39,12 @@ export default function Register() {
 
           <div className='form'>
             <form className='login-form' onSubmit={handleSubmit}>
-
               <div className='input_field' >
                 <label htmlFor='email'>Username</label>
 
-              {/* <div className='input_field'>
-                <label htmlFor='username'>Username</label> */}
-
-
                 <div className='input_box'></div>
                 <input
-                  id='username'
+                  id=' email'
                   placeholder='John Smith'
                   onChange={(e) => {
                     setUsername(e.target.value);
