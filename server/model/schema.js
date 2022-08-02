@@ -38,7 +38,6 @@ const bookSchema = new mongoose.Schema({ // name, desc, isbn, imageUrl, moreInfo
   },
   description: {
     type: String,
-    required: true
   },
   isbn: {
     type: String,
@@ -46,11 +45,9 @@ const bookSchema = new mongoose.Schema({ // name, desc, isbn, imageUrl, moreInfo
   },
   imageUrl: {
     type: String,
-    required: true
   },
   moreInfo: {
     type: String,
-    required: true
   },
   comments: [commentsSchema]
 

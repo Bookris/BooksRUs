@@ -1,16 +1,21 @@
 import { createStore, action } from 'easy-peasy';
 
 const store = createStore({
-  user: {},
+  user: {
+    likedBooks: []
+  },
   updateUser: action((state, payload) => {
     state.user = payload;
   }),
   logout: action((state, payload) => {
-    state.user = {};
+    state.user = {
+      likedBooks:[]
+    };
   }),
   userLikedBooks: [],
   updateLikedBooks: action((state, payload) => {
-    state.userLikedBooks = payload;
+    console.log('payload: ',payload);
+    state.user.likedBooks = payload;
   })
 }, // model
   { devTools: true } //config
