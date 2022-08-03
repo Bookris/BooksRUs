@@ -39,13 +39,20 @@ module.exports = {
 
   },
   devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
-    },
+    // static: {
+    //   directory: path.resolve(__dirname, 'dist'),
+    //   publicPath: '/',
+    // },
     historyApiFallback: true,
-    proxy: { '/books/*': 'http://localhost:3000' },
-    proxy: { '/test': 'http://localhost:3000' }, 
+    proxy: { 
+      '/books': 'http://localhost:3000',
+      '/test': 'http://localhost:3000',
+      '/authorized': 'http://localhost:3000',
+      '/oauth': 'http://localhost:3000'
+     },
+    // proxy: { '/test/': 'http://localhost:3000' }, 
+    // proxy: { '/authorized/': 'http://localhost:3000' }, 
+    // proxy: { '/oauth/': 'http://localhost:3000' }, 
     compress: true,
     hot: true,
     port: 8080

@@ -18,7 +18,6 @@ function App() {
   // we will need to store this in our global state -- @johnny can use easy-peasy here
   const [user, setUser] = useState({});
   let navigate = useNavigate();
-
   // let navigate = useNavigate() react hook
   async function handleCallbackResponse(response) {
     console.log('encoded JWT ID token' + response.credential);

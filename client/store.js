@@ -5,6 +5,7 @@ const store = createStore({
     likedBooks: []
   },
   updateUser: action((state, payload) => {
+    console.log("UPDATE USER PAYLOAD: ", payload)
     state.user = {
       ...state.user,
       ...payload

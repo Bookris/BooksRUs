@@ -1,4 +1,4 @@
-const { Session } = require('../model/schema');
+const { Session, User } = require('../model/schema');
 const userController = require('./userController.js')
 const sessionController = {};
 
@@ -8,15 +8,19 @@ const sessionController = {};
  */
 sessionController.isLoggedIn = async (req, res, next) => {
   // write code here
-  
+  console.log("COOKIE: ", req.cookies)
   const {ssid} = req.cookies
   const session = await Session.findOne({cookieId: ssid})
-  console.log(session);
+  // console.log("session id: ", session.cookieId);
+  // console.log("ssid: ", ssid)
   if (!session) {
     res.locals.session = false;
     return next();
-  } else if (session.cookieId === ssid) {
-    res.locals.session = true;
+  } else if (session.cookieId == ssid) {
+    //findOne User and return that user object
+    const user = await User.findOne({_id: ssid})
+    console.log('USER: ', user);
+    res.locals.session = user;
     return next();
   } else {
     res.locals.session = false;

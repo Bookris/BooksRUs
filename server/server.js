@@ -18,28 +18,37 @@ app.use(cookieParser());
 // load all assets
 app.use(express.static(path.join(__dirname, '../client/assets')));
 
-app.get('/', (req, res) => {
-  res.render('hi');
-});
+// app.get('/', (req, res) => {
+//   res.render('hi');
+// });
 
 // router: /oauth
 app.use('/oauth', oauthRouter);
 
-// router: /login /logup /logout /reset
-app.use('/auth', authRouter);
+// // router: /login /logup /logout /reset
+// app.use('/auth', authRouter);
 
 // router: /search, /myshelf,
 app.use('/books', bookRouter);
 
-app.get('/', sessionController.isLoggedIn, (req, res) => {
-  if (res.locals.session) {
-    // render profile page
-    console.log('I AM FROM THE /PROFILE GET REQUEST', res.locals.session)
-    // res.render('../client/pages/Profile')
-    res.redirect('/profile')
-  } else {
-    res.redirect('/')
-  }
+app.use('/test', (req, res) => {
+  console.log('AAAAAAAAAAAA');
+  res.redirect('/search');
+})
+
+app.use('/authorized', (req, res, next) => {console.log("IM HERE"); return next()}, sessionController.isLoggedIn, (req, res) => {
+  // if (res.locals.session) {
+  //   // render profile page
+  //   console.log('I AM FROM THE /authorized GET REQUEST', res.locals.session)
+  //   // res.render('../client/pages/Profile')
+  //   res.redirect('/profile')
+  //   // res.status(200).json({authorized: true})
+  // } else {
+  //   res.redirect('/')
+  //   // res.status(200).json({authorized: false})
+  // }
+  console.log('I AM RES',res.locals.session)
+  return res.status(200).json(res.locals.session);
 });
 
 // non-existing page err handler

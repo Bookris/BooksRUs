@@ -89,7 +89,7 @@ const User = mongoose.model('Users', userSchema)
 
 
 const sessionSchema = new Schema({
-  cookieId: { type: String, required: true, unique: true },
+  cookieId: { type: Schema.Types.ObjectId, required: true, unique: true },
   createdAt: { type: Date, expires: '168h', default: Date.now }
 });
 
