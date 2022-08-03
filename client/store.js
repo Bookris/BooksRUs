@@ -5,16 +5,21 @@ const store = createStore({
     likedBooks: []
   },
   updateUser: action((state, payload) => {
-    state.user = payload;
+    state.user = {
+      ...state.user,
+      ...payload
+    }
+
+    console.log( state.user);
   }),
   logout: action((state, payload) => {
     state.user = {
-      likedBooks:[]
+      likedBooks: []
     };
   }),
-  userLikedBooks: [],
+  // userLikedBooks: [],
   updateLikedBooks: action((state, payload) => {
-    console.log('payload: ',payload);
+    console.log('payload: ', payload);
     state.user.likedBooks = payload;
   })
 }, // model

@@ -9,13 +9,9 @@ export default function Profile() {
   console.log(user);
   // const logoutUser = useStoreActions((actions) => actions.logout);
   let navigate = useNavigate();
-  let likedBooks = [];
-  if (user.likedBooks) {
-    likedBooks = user.likedBooks;
-  }
-  // const likedBooks = useStoreState((state) => state.user.likedBooks);
-  const likedBooksComponents = [];
-  console.log(likedBooks);
+  const likedBooks = user.likedBooks;
+  console.log('user likedbooks: ', user.likedBooks);
+  const likedBooksComponents = []
   for (let i = 0; i < likedBooks.length; i++) {
     const currentBook = likedBooks[i];
     likedBooksComponents.push(<ProfileBooks book={currentBook} key={i} />);
