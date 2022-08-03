@@ -55,19 +55,21 @@ bookController.like = async (req, res, next) => {
 bookController.unLike = async (req, res, next) => {
   // the book liked before
   //req body would be {email, bookData}
-  const { email, isbn } = req.body
-  await User.findOneAndUpdate({ email: email }, { $pull: { likedBooks: { isbn: isbn } } }, { new: true }).exec()
+  const { email, isbn, title } = req.body
+  let foundBook;
+  (isbn === 'Not Found') ? foundBook = await Book.findOne({ name: title }) : foundBook = await Book.findOne({ isbn: isbn });
+  if (!foundBook) next({ message: { err: 'err finding books in removing book from likes' } })
+
+  await User.findOneAndUpdate({ email: email }, { $pull: { likedBooks: foundBook.id } }).exec()
     .then(data => {
+      console.log('Found and updated: ', data)
       res.locals.data = data;
     })
     .catch(err => next({ message: { err: 'err in removing book from likes' } }))
   // remvove the book from book collection
   // remove the 
-  await Book.deleteOne({ isbn: isbn }).exec()
-    .then((doc) => { console.log(doc); return next() })
-    .catch((err) => next({ message: { err: 'err in delete on in Book' } }))
 
-
+  return next();
 }
 
 

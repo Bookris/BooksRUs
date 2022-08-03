@@ -8,6 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: '[name].js',
     assetModuleFilename: '[name][ext]',
   },
@@ -39,10 +40,12 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'build'),
-      publicPath: '/build',
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/',
     },
-    proxy: { '/**': 'http://localhost:3000' },
+    historyApiFallback: true,
+    proxy: { '/books/*': 'http://localhost:3000' },
+    proxy: { '/test': 'http://localhost:3000' }, 
     compress: true,
     hot: true,
     port: 8080

@@ -30,7 +30,7 @@ render(
         </Route>
 
         <Route path='/profile' element={<Profile />} />
-        <Route path='/search' element={<Search />} />
+        <Route exact path='/search' element={<Search />} />
 
         <Route
           path='*'

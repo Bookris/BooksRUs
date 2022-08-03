@@ -9,15 +9,24 @@ export default function Book(props) {
   const updateUser = useStoreActions((actions) => actions.updateUser);
   const likedBooks = useStoreState((state) => state.user.likedBooks)
   const updateLikedBooks = useStoreActions((actions) => actions.updateLikedBooks);
-  const imageUrl = props.book.volumeInfo.imageLinks ? Object.values(props.book.volumeInfo.imageLinks)[0] : "not found";
-  const isbn = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].identifier : props.book.volumeInfo.industryIdentifiers[0].identifier
-  const isbn_type = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].type : props.book.volumeInfo.industryIdentifiers[0].type
+  const imageUrl = props.book.volumeInfo.imageLinks ? Object.values(props.book.volumeInfo.imageLinks)[0] : "Not found";
+  const infoLink = props.book.volumeInfo ? props.book.volumeInfo : 'Not Found';
+  let isbn;
+  let isbn_type;
+  if (props.book.volumeInfo.industryIdentifiers) {
+    isbn = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].identifier : props.book.volumeInfo.industryIdentifiers[0].identifier
+    isbn_type = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].type : props.book.volumeInfo.industryIdentifiers[0].type
+  } else {
+    isbn = 'Not Found';
+    isbn_type = 'N/A';
+  }
+  console.log('props.book.volumeInfo.infoLink');
   const bookData = {
     name: props.book.volumeInfo.title,
     description: props.book.volumeInfo.description,
     isbn: isbn, // props.book.volumeInfo.industryIdentifiers[1].identifier,
     imageUrl: imageUrl,
-    //moreInfo: props.book.volumeInfo.infoLink
+    moreInfo: props.book.volumeInfo.infoLink
   }
 
   async function handleLike(event) {
@@ -44,7 +53,7 @@ export default function Book(props) {
   }
 
   return (
-    <div>
+    <div className="IndividualBook">
       <h4>Book Name: {bookData.name} </h4>
       <img  src={bookData.imageUrl} />
       <h4>{isbn_type}: {bookData.isbn}</h4>
