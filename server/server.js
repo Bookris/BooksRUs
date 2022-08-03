@@ -18,14 +18,14 @@ app.get('/', (req, res) => {
   res.render('hi');
 });
 
+// router: /oauth
+app.use('/oauth', oauthRouter);
+
 // router: /login /logup /logout /reset
-app.use('/', authRouter);
+app.use('/auth', authRouter);
 
 // router: /search, /myshelf,
 app.use('/books', bookRouter);
-
-// router: /oauth
-app.use('/oauth', oauthRouter);
 
 // non-existing page err handler
 app.use((req, res) =>
@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
   // call Object.Assign, for the user defined middleware err to overwrite our default err
   const errorObject = Object.assign({}, defaultErr, err); // { message: { err: 'user registered err' } }
   // console.log err
-  // console.log(errorObject.log);
+  console.log(errorObject.log);
   // return to the user directly, not next()
   return res.status(errorObject.status).json(errorObject.message);
 });

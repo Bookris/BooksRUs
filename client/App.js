@@ -27,15 +27,22 @@ function App() {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     // setUser(userObject);
-    updateUser(userObject);
+   
     document.getElementById('signInDiv').hidden = true;
 
     // make a fetch request to server
-    const user = await fetch('', {
+    const user = await fetch('/oauth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: userObject // send whole response to server
+      body: JSON.stringify(userObject) // JSON.stringify(response.credential) // send whole response to server
     })
+    const obj = await user.json();
+    console.log("post response json: ",  obj)
+    if (user.status === 200) {
+      updateUser(obj); // call this after server responds back
+      navigate('/profile', { replace: true });
+    }
+   
     // navigate('/profile', { replace: true });
   }
 
