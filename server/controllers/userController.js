@@ -9,7 +9,7 @@ userController.oauth = async (req, res, next) => {
   res.locals.userObject = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    userController.register(req, res, next);
+    return userController.register(req, res, next);
   } else {
     return next();
   }
@@ -57,8 +57,12 @@ userController.login = async (req, res, next) => {
   //req.body should could contain email, password
   // const { email, password } = req.body;
   const { email } = req.body;
+  let password = '';
+  if (req.body.password) {
+    password = req.body.password
+  }
   // console.log('body?????', req.body);
-  await User.findOne({ email: email /*, password: password */ }) // frontend needs to know the query response format: null/user data
+  await User.findOne({ email: email, password: password }) // frontend needs to know the query response format: null/user data
     .then(async (data) => {
       console.log("inside find", data);
       if (data) {
@@ -67,16 +71,22 @@ userController.login = async (req, res, next) => {
 
         user.likedBooks = result;
         res.locals.user = user
-        console.log("user", res.locals.user)
+        console.log("user found: ", res.locals.user)
         // console.log('res!!!', data.username);
+        res.locals.login = true;
+        res.locals.pass = true;
         return next();
       } else {
+        res.locals.login = false;
+        res.locals.pass = false;
         res.locals.user = null;
         return next();
       }
     })
     .catch((err) => next({ message: { err: 'user login err' } }));
 };
+
+
 
 
 module.exports = userController;

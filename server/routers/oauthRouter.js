@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const oauthController = require('../controllers/oauthController');
+const cookieController = require('../controllers/cookieController');
+const sessionController = require('../controllers/sessionController');
 
 // server OAuth controller will check if user exists
       // if not, create user
@@ -23,6 +25,8 @@ router.post('/',
   // if not, register first
   userController.oauth,
   userController.login,
+  cookieController.setSSIDCookie, 
+  sessionController.startSession,
   (req, res) => {
     console.log("sending status + res.locals.userObject: ", res.locals.userObject);
     res.status(200).json(res.locals.userObject);

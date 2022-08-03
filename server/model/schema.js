@@ -68,7 +68,7 @@ const userSchema = new mongoose.Schema({  // username, password, friends, commen
   },
   password: {
     type: String,
-    required: true
+    // required: true
   },
   friends: [],
   comments: [{
@@ -85,5 +85,14 @@ const userSchema = new mongoose.Schema({  // username, password, friends, commen
 const User = mongoose.model('Users', userSchema)
 
 
+//Creating a model for sessions ID
+
+
+const sessionSchema = new Schema({
+  cookieId: { type: String, required: true, unique: true },
+  createdAt: { type: Date, expires: '168h', default: Date.now }
+});
+
+const Session = mongoose.model('Sessions', sessionSchema);
 /* Exporting the Users, Comments, and Books models to be used in other files. */
-module.exports = { User, Comment, Book };
+module.exports = { User, Comment, Book, Session };

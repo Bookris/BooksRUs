@@ -4,9 +4,13 @@ const authRouter = require('./routers/authRouter.js');
 const bookRouter = require('./routers/bookRouter.js');
 const oauthRouter = require('./routers/oauthRouter.js');
 const app = express();
+const cookieParser = require('cookie-parser');
 const PORT = 3000;
+const sessionController = require('./controllers/sessionController.js')
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //test server can work
 // app.get('/test', (req, res) => res.send("i am okayyyyyyy'"))
@@ -26,6 +30,17 @@ app.use('/auth', authRouter);
 
 // router: /search, /myshelf,
 app.use('/books', bookRouter);
+
+app.get('/', sessionController.isLoggedIn, (req, res) => {
+  if (res.locals.session) {
+    // render profile page
+    console.log('I AM FROM THE /PROFILE GET REQUEST', res.locals.session)
+    // res.render('../client/pages/Profile')
+    res.redirect('/profile')
+  } else {
+    res.redirect('/')
+  }
+});
 
 // non-existing page err handler
 app.use((req, res) =>
