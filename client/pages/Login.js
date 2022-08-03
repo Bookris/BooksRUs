@@ -23,7 +23,7 @@ export default function Login() {
       //tell user that login credentials were wrong
       console.log('invalid credentials')
     } else {
-
+      console.log('data: ', data)
       updateUser(data);//updates our global state
       navigate("/profile", { replace: true }) //navigates to profile if login was successful
     }

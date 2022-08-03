@@ -7,7 +7,7 @@ export default function Book(props) {
   //fetch req to /like. body should be email and bookdata {name, description,isbn,imgUrl, moreInfo}. probably need to refactor post('/like ) to fit w frontend  
   const user = useStoreState((state) => state.user);
   const updateUser = useStoreActions((actions) => actions.updateUser);
-  const likedBooks = useStoreState((state) => state.userLikedBooks);
+  const likedBooks = useStoreState((state) => state.user.likedBooks)
   const updateLikedBooks = useStoreActions((actions) => actions.updateLikedBooks);
   const imageUrl = props.book.volumeInfo.imageLinks ? Object.values(props.book.volumeInfo.imageLinks)[0] : "not found";
   const isbn = props.book.volumeInfo.industryIdentifiers[1] ? props.book.volumeInfo.industryIdentifiers[1].identifier : props.book.volumeInfo.industryIdentifiers[0].identifier
@@ -21,7 +21,7 @@ export default function Book(props) {
   }
 
   console.log('bookdata: ', bookData)
-
+  console.log('likedbooks: ', likedBooks);
   async function handleLike(event) {
     // console.log('user????', user);
 
@@ -33,9 +33,11 @@ export default function Book(props) {
       body: JSON.stringify(sendingInfo)
     })
       .then((data) => data.json())
-      .then(async (data) => {
+      .then((data) => {
         console.log('returned data ',data);
-        await updateLikedBooks(data);
+        if (data.length > 0) {
+          updateLikedBooks(data);
+        }
         console.log('liked books ',likedBooks);
       }/*updateUser(data)*/)
       // .then((data) => updateUser(data))

@@ -23,10 +23,14 @@ userController.login = async (req, res, next) => {
   const { email, password } = req.body;
   // console.log('body?????', req.body);
   await User.findOne({ email: email, password: password }) // frontend needs to know the query response format: null/user data
-    .then((data) => {
+    .then(async (data) => {
       console.log("inside find", data);
       if (data) {
-        res.locals.user = data;
+        const user = { ...data._doc };
+        const result = await Book.find({ _id: { $in: user.likedBooks } });
+
+        user.likedBooks = result;
+        res.locals.user = user
         // console.log('res!!!', data.username);
         return next();
       } else {

@@ -7,27 +7,44 @@ bookController.like = async (req, res, next) => {
   // get the req body of book isbn identifier
   const { email, bookData } = req.body;
   console.log("!!! request body", email, bookData)
+
+  let book = await Book.findOne({ isbn: bookData.isbn });
+  console.log('RESULT: ', book);
+
+  if (!book) {
+    book = await Book.create({ 
+      name: bookData.name, 
+      description: bookData.description, 
+      isbn: bookData.isbn, 
+      imageUrl: bookData.imageUrl, 
+      moreInfo: bookData.moreInfo 
+    });
+  }
+
   await User.findOne({ email: email }).exec()
     .then(user => {
       const arrOfBooks = user.likedBooks;
-      for (const book of arrOfBooks) {
+      for (const bookElem of arrOfBooks) {
         // check book.isbn, if find, return
-        if (book.isbn === bookData.isbn) {
+        if (bookElem === book.id) {
           console.log('book is already liked');
-          res.locals.data = user; // $$$ frontend needs to know this
+          res.locals.data = []; // $$$ frontend needs to know this
           return next();
         }
       }
       //adding instance of book
       async function helper() {
-        const likedBook = await Book.create({ name: bookData.name, description: bookData.description, isbn: bookData.isbn, imageUrl: bookData.imageUrl, moreInfo: bookData.moreInfo });
-        const data = await User.updateOne({ email: email }, { $push: { likedBooks: likedBook } }).exec()
+        // const likedBook = await Book.create({ name: bookData.name, description: bookData.description, isbn: bookData.isbn, imageUrl: bookData.imageUrl, moreInfo: bookData.moreInfo });
+        const data = await User.updateOne({ email: email }, { $push: { likedBooks: book.id } }).exec()
           .then((doc) => { console.log(doc) }) // 
           .catch((err) => { console.log('update user likedbook err!!!') });
 
-        const updatedUser = await User.findOne({ email: email });
-        console.log('iam updateduer!!!!!!!', updatedUser);
-        res.locals.data = updatedUser.likedBooks;
+        const user = await User.findOne({ email: email });
+
+        const result = await Book.find({ _id: { $in: user.likedBooks } });
+
+        // console.log('res!!!', data.username);
+        res.locals.data = result;
       };
 
       helper().then(() => next());

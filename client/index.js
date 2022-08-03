@@ -15,7 +15,7 @@ import Nav from './components/Nav';
 
 render(
   <StoreProvider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Nav />
       <Routes>
         <Route path='/' element={<App />} />
@@ -39,7 +39,7 @@ render(
         <Route path='/books' />
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StoreProvider>
   , rootElement // the big container
 );  

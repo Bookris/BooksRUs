@@ -49,7 +49,10 @@ const bookSchema = new mongoose.Schema({ // name, desc, isbn, imageUrl, moreInfo
   moreInfo: {
     type: String,
   },
-  comments: [commentsSchema]
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'comment'
+  }]
 
 })
 const Book = mongoose.model('Books', bookSchema);
@@ -68,8 +71,14 @@ const userSchema = new mongoose.Schema({  // username, password, friends, commen
     required: true
   },
   friends: [],
-  comments: [commentsSchema],
-  likedBooks: [bookSchema]
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'comment'
+  }],
+  likedBooks: [{
+    type: Schema.Types.ObjectId,
+    ref: 'book'
+  }]
 
 })
 /* Creating a model for the Users collection. */
