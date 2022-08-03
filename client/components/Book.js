@@ -46,7 +46,7 @@ export default function Book(props) {
   return (
     <div>
       <h4>Book Name: {bookData.name} </h4>
-      <img src={bookData.imageUrl} />
+      <img  src={bookData.imageUrl} />
       <h4>{isbn_type}: {bookData.isbn}</h4>
 
       <h4>Description: {bookData.description}</h4>
