@@ -17,11 +17,9 @@ export default function Book(props) {
     description: props.book.volumeInfo.description,
     isbn: isbn, // props.book.volumeInfo.industryIdentifiers[1].identifier,
     imageUrl: imageUrl,
-    moreInfo: props.book.volumeInfo.infoLink
+    //moreInfo: props.book.volumeInfo.infoLink
   }
 
-  console.log('bookdata: ', bookData)
-  console.log('likedbooks: ', likedBooks);
   async function handleLike(event) {
     // console.log('user????', user);
 
