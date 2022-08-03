@@ -20,7 +20,7 @@ function App() {
   let navigate = useNavigate();
 
   // let navigate = useNavigate() react hook
-  function handleCallbackResponse(response) {
+  async function handleCallbackResponse(response) {
     console.log('encoded JWT ID token' + response.credential);
     // look to potentially save response.credential in order to track logged in user
 
@@ -28,8 +28,15 @@ function App() {
     console.log(userObject);
     // setUser(userObject);
     updateUser(userObject);
-    navigate('/profile', { replace: true });
     document.getElementById('signInDiv').hidden = true;
+
+    // make a fetch request to server
+    const user = await fetch('', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: userObject // send whole response to server
+    })
+    // navigate('/profile', { replace: true });
   }
 
   function handleSignOut(event) {

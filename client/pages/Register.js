@@ -23,7 +23,6 @@ export default function Register() {
       //tell user that login credentials were wrong
       console.log('invalid credentials');
     } else {
-
       navigate('/auth/login', { replace: true }); //navigates to profile if login was successful
     }
   }

@@ -2,6 +2,14 @@ const { User, Comment, Book } = require('../model/schema');
 
 const userController = {};
 
+userController.oauth = async (req, res, next) => {
+  const { email } = req.body;
+  const user = User.findOne({ email });
+  if (!user) {
+    return this.register(req, res, next);
+  } 
+}
+
 userController.register = async (req, res, next) => {
   // create a doc
 
