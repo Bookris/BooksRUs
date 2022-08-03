@@ -55,7 +55,6 @@ export default function search() {
       <h1 className='searchbar'>Search for a book!</h1>
       <form className='searchbar'>
         <input type='text' id="search" placeholder='My favorite title'></input>
-        <label htmlFor="search"></label>
         <button className='search-button' type='button' onClick={() => { queryBooks(document.getElementById('search').value) }}>Search</button>
       </form>
 

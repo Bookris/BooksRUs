@@ -11,7 +11,7 @@ export default function ProfileBooks(props) {
 
       <h4>Description: {props.book.description}</h4>
       <a href={props.book.moreInfo}>More Info</a>
-
+      <button>Remove</button>
       <br></br>
 
     </div >
