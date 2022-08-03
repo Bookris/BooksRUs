@@ -34,7 +34,7 @@ export default function Profile() {
         <div className='card text-center'>
           <div className='card-body'>
             <h3 className='card-title'>User Profile</h3>
-            <img src={user.picture}></img>
+            <img className ="profile-image" src={user.picture}></img>
             <p className='card-text'>User: {user.name}</p>
             <p className='card-text'>Email: {user.email}</p>
           </div>
