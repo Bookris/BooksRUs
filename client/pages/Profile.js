@@ -6,10 +6,16 @@ import store from '../store';
 
 export default function Profile() {
   const user = useStoreState((state) => state.user);
-  const logoutUser = useStoreActions((actions) => actions.logout);
+  console.log(user);
+  // const logoutUser = useStoreActions((actions) => actions.logout);
   let navigate = useNavigate();
-  const likedBooks = user.likedBooks;
+  let likedBooks = [];
+  if (user.likedBooks) {
+    likedBooks = user.likedBooks;
+  }
+  // const likedBooks = useStoreState((state) => state.user.likedBooks);
   const likedBooksComponents = [];
+  console.log(likedBooks);
   for (let i = 0; i < likedBooks.length; i++) {
     const currentBook = likedBooks[i];
     likedBooksComponents.push(<ProfileBooks book={currentBook} key={i} />);
@@ -25,20 +31,23 @@ export default function Profile() {
       </button>
 
       <div>
-        <div class='card text-center'>
-          <div class='card-body'>
-            <h3 class='card-title'>User Profile</h3>
-            <p class='card-text'>User: {user.username}</p>
-            <p class='card-text'>Email: {user.email}</p>
+        <div className='card text-center'>
+          <div className='card-body'>
+            <h3 className='card-title'>User Profile</h3>
+            <img src={user.picture}></img>
+            <p className='card-text'>User: {user.name}</p>
+            <p className='card-text'>Email: {user.email}</p>
           </div>
         </div>
       </div>
 
       <div className='favorite_books'>
-        <div class='card text-center'>
-          <div class='card-body'>
-            <h3 class='card-title'>My Favorite Books</h3>
-            <p class='card-text'>View all your favorite books in one place!</p>
+        <div className='card text-center'>
+          <div className='card-body'>
+            <h3 className='card-title'>My Favorite Books</h3>
+            <p className='card-text'>
+              View all your favorite books in one place!
+            </p>
             {likedBooksComponents}
           </div>
         </div>

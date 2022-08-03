@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { HashRouter, BrowserRouter, Routes, Route } from 'react-router-dom';
 import store from './store';
 import { StoreProvider } from 'easy-peasy';
@@ -12,8 +12,11 @@ import Search from './pages/Search';
 import './assets/styles.scss';
 const rootElement = document.getElementById('root');
 import Nav from './components/Nav';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
-ReactDOM.render(
+// const label = useStoreState((state) => state.label);
+
+render(
   <StoreProvider store={store}>
     <BrowserRouter>
       <Nav />

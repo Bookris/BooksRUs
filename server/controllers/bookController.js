@@ -26,12 +26,11 @@ bookController.like = async (req, res, next) => {
           .catch((err) => { console.log('update user likedbook err!!!') });
 
         const updatedUser = await User.findOne({ email: email });
-        // console.log('iam updateduer!!!!!!!', updatedUser);
-        res.locals.data = updatedUser;
+        console.log('iam updateduer!!!!!!!', updatedUser);
+        res.locals.data = updatedUser.likedBooks;
       };
 
-      helper()
-      return next();
+      helper().then(() => next());
     })
     .catch((err) => next({ message: { err: 'err in booklike controller' } }));
 }
