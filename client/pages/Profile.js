@@ -25,6 +25,7 @@ export default function Profile() {
             username: data.username,
             email: data.email,
             likedBooks: data.likedBooks,
+            picture: data.picture,
           });
         } else {
           console.log('USER NOT FOUND RETURNING', data);
