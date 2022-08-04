@@ -18,18 +18,31 @@ function App() {
   // we will need to store this in our global state -- @johnny can use easy-peasy here
   const [user, setUser] = useState({});
   let navigate = useNavigate();
-
   // let navigate = useNavigate() react hook
-  function handleCallbackResponse(response) {
+  async function handleCallbackResponse(response) {
     console.log('encoded JWT ID token' + response.credential);
     // look to potentially save response.credential in order to track logged in user
 
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     // setUser(userObject);
-    updateUser(userObject);
-    navigate('/profile', { replace: true });
+   
     document.getElementById('signInDiv').hidden = true;
+
+    // make a fetch request to server
+    const user = await fetch('/oauth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userObject) // JSON.stringify(response.credential) // send whole response to server
+    })
+    const obj = await user.json();
+    console.log("post response json: ",  obj)
+    if (user.status === 200) {
+      updateUser(obj); // call this after server responds back
+      navigate('/profile', { replace: true });
+    }
+   
+    // navigate('/profile', { replace: true });
   }
 
   function handleSignOut(event) {

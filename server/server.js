@@ -2,10 +2,15 @@ const path = require('path');
 const express = require('express');
 const authRouter = require('./routers/authRouter.js');
 const bookRouter = require('./routers/bookRouter.js');
+const oauthRouter = require('./routers/oauthRouter.js');
 const app = express();
+const cookieParser = require('cookie-parser');
 const PORT = 3000;
+const sessionController = require('./controllers/sessionController.js')
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //test server can work
 // app.get('/test', (req, res) => res.send("i am okayyyyyyy'"))
@@ -13,15 +18,38 @@ app.use(express.urlencoded({ extended: true }));
 // load all assets
 app.use(express.static(path.join(__dirname, '../client/assets')));
 
-app.get('/', (req, res) => {
-  res.render('hi');
-});
+// app.get('/', (req, res) => {
+//   res.render('hi');
+// });
 
-// router: /login /logup /logout /reset
-app.use('/', authRouter);
+// router: /oauth
+app.use('/oauth', oauthRouter);
+
+// // router: /login /logup /logout /reset
+// app.use('/auth', authRouter);
 
 // router: /search, /myshelf,
 app.use('/books', bookRouter);
+
+app.use('/test', (req, res) => {
+  console.log('AAAAAAAAAAAA');
+  res.redirect('/search');
+})
+
+app.use('/authorized', (req, res, next) => {console.log("IM HERE"); return next()}, sessionController.isLoggedIn, (req, res) => {
+  // if (res.locals.session) {
+  //   // render profile page
+  //   console.log('I AM FROM THE /authorized GET REQUEST', res.locals.session)
+  //   // res.render('../client/pages/Profile')
+  //   res.redirect('/profile')
+  //   // res.status(200).json({authorized: true})
+  // } else {
+  //   res.redirect('/')
+  //   // res.status(200).json({authorized: false})
+  // }
+  console.log('I AM RES',res.locals.session)
+  return res.status(200).json(res.locals.session);
+});
 
 // non-existing page err handler
 app.use((req, res) =>
@@ -38,7 +66,7 @@ app.use((err, req, res, next) => {
   // call Object.Assign, for the user defined middleware err to overwrite our default err
   const errorObject = Object.assign({}, defaultErr, err); // { message: { err: 'user registered err' } }
   // console.log err
-  // console.log(errorObject.log);
+  console.log(errorObject.log);
   // return to the user directly, not next()
   return res.status(errorObject.status).json(errorObject.message);
 });

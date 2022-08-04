@@ -42,7 +42,7 @@ bookController.like = async (req, res, next) => {
         const user = await User.findOne({ email: email });
 
         const result = await Book.find({ _id: { $in: user.likedBooks } });
-
+        console.log('RESULT: ', result);
         // console.log('res!!!', data.username);
         res.locals.data = result;
       };
