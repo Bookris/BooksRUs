@@ -7,9 +7,12 @@ import store from '../store';
 export default function Profile() {
   let navigate = useNavigate();
   const [isLoaded, setLoaded] = React.useState(false);
+  const [books, setBooks] = React.useState([])
   const user = useStoreState((state) => state.user);
   const updateUser = useStoreActions((actions) => actions.updateUser);
   console.log('USER: ', user);
+
+
   React.useEffect(() => {
     if (!isLoaded) {
       fetch('/authorized')
@@ -31,12 +34,39 @@ export default function Profile() {
       })
     }   
   }, []);
+
+ 
+   React.useEffect(() => {
+console.log('I AM THE USER EMAIL', user.email)
+       fetch('/books/allLiked',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: user.email }),
+    })
+         .then((res) => {
+          
+           return res.json();
+         })
+         .then((data) => {
+           if (data) {
+             console.log('last .then data: ', data);
+             setBooks(data);
+             
+           } else {
+             console.log('USER NOT FOUND RETURNING', data);
+             navigate('/');
+           }
+         });
+     
+   }, []);
   
+
+
   if (isLoaded) {
     console.log(user);
     // const logoutUser = useStoreActions((actions) => actions.logout);
-    const likedBooks = user.likedBooks;
-    console.log('user likedbooks: ', user.likedBooks);
+    const likedBooks = books;
+    console.log('user likedbooks: ',books);
     const likedBooksComponents = []
     for (let i = 0; i < likedBooks.length; i++) {
       const currentBook = likedBooks[i];

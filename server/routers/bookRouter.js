@@ -14,6 +14,8 @@ router.post('/like', bookController.like, (req, res) => res.status(200).json(res
 
 router.post('/unLike', bookController.unLike, (req, res) => res.status(200).json(res.locals.data));
 
+router.post('/allLiked',bookController.getAllLikedBooks, (req,res)=> res.status(200).json(res.locals.allLiked)
+)
 
 
 module.exports = router;
