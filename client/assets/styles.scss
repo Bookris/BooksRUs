@@ -22,9 +22,6 @@ body {
   font-size: 14px;
 }
 
-.container-fluid {
-  // background-color: #F9f6ed;
-}
 
 .navbar-nav {
   cursor: pointer;
@@ -326,4 +323,9 @@ body {
   color: #585446;
 
   font-family: 'Montserrat', sans-serif !important;
+}
+
+// home button
+.navbar-brand {
+  cursor: pointer;
 }

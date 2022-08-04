@@ -44,7 +44,10 @@ export default function () {
           <a onClick={() => navigate('/search', { replace: true })}>Search</a>
         </div> */}
 
-        <a className='navbar-brand' href='#'>
+        <a
+          className='navbar-brand'
+          onClick={() => navigate('/profile', { replace: true })}
+        >
           Home
         </a>
         <button
@@ -70,14 +73,6 @@ export default function () {
                 }}
               >
                 Login
-              </a>
-            </li>
-            <li className='nav-item'>
-              <a
-                className='nav-link'
-                onClick={() => navigate('/profile', { replace: true })}
-              >
-                Profile
               </a>
             </li>
 
