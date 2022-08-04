@@ -23,6 +23,7 @@ export default function Profile() {
           updateUser({
             username: data.username,
             email: data.email,
+            picture: data.picture,
           });
         } else {
           console.log('USER NOT FOUND RETURNING', data);
