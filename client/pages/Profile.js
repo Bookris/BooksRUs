@@ -78,13 +78,7 @@ export default function Profile() {
     }
     return (
       <div className='user-profile'>
-        <button
-          className='searchbtn_profile'
-          onClick={() => navigate('/search', { replace: true })}
-        >
-          {' '}
-          Search
-        </button>
+       
 
         <div>
           <div className='card text-center'>

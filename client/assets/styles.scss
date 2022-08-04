@@ -25,10 +25,18 @@ body {
 
 .navbar-nav {
   cursor: pointer;
+  color: #BABDCF !important;
+  display: flex !important;
+  justify-content: space-evenly !important;
 }
 
+.nav-item {
+color: #BABDCF!important ;
+}
 .nav-item:hover {
-  background-color: #c1e1c1;
+  background-color: #babdcf81 !important;;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px rgba(153, 153, 153, 0.481);
 }
 
 .user-profile {
@@ -49,7 +57,10 @@ body {
 }
 
 .searchBody {
+font-family: 'Montserrat', sans-serif !important;
+
   padding-bottom: 30px;
+  width: 70%;
 }
 
 .search-button {
@@ -227,6 +238,7 @@ body {
 
 .favorite_books {
   padding-top: 15px;
+ 
 }
 
 .searchbtn_profile {
@@ -239,15 +251,42 @@ body {
   align-items: center;
 }
 
+#seaRCH{
+  background-color: white;
+  margin: 1em 0em;
+}
+
 .searchbtn_profile:hover {
-  background-color: #c1e1c1;
+  background-color: #40445C;
 }
 
 .searchbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1em;
+  // display: block;
+  //   width: 100%;
+  //   padding: 0.375rem 0.75rem;
+  //   font-size: 1rem;
+  //   font-weight: 400;
+  //   line-height: 1.5;
+  //   color: #212529;
+  //   background-color: #fff;
+  //   background-clip: padding-box;
+  //   border: 1px solid #ced4da;
+  //   -webkit-appearance: none;
+  //   -moz-appearance: none;
+  //   appearance: none;
+  //   border-radius: 0.375rem;
+  //   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+
 }
+
+
+
+
 
 .jumbotron {
   display: flex;
@@ -328,4 +367,35 @@ body {
 // home button
 .navbar-brand {
   cursor: pointer;
+}
+
+.navbar-light{
+  background-color: #40445C !important;
+  color: #BABDCF !important;
+  display: flex;
+  justify-content: space-between !important;
+  align-items: space-evenly !important;
+}
+
+.search-button{
+  background-color: #626990;
+  border-radius:10px;
+  border:1px solid#262626;
+  color: #efefefb8;
+  transition: all 1s;
+  box-shadow: 3px 3px 5px #2626263a;
+  letter-spacing: 3px;
+max-height: 3em;
+display:flex;
+justify-content: center;
+
+}
+
+.search-button:hover{
+  background-color:#6269908b ;
+}
+
+.card-body{
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.222);
+  
 }

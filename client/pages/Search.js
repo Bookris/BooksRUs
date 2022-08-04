@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Book from '../components/Book.js'
 import Nav from '../components/Nav.js'
-
-
-
+import Form from 'react-bootstrap/Form';
+import searchImg from '../assets/search-icon-png-1.png'
 export default function search() {
   // create a search box
   // start an api query
@@ -49,34 +48,64 @@ export default function search() {
   };
 
   return (
+    <div class='centered'>
+      <div className='searchBody'>
+        <h1
+          className='searchbar'
+          style={{ letterSpacing: '6px', wordSpacing: '8px' }}
+        >
+          Search for a book!
+        </h1>
+        <form className='searchbar'>
+          {/* <input
+            type='text'
+            id='search'
+            placeholder='My favorite title'
+          ></input>
+          <button
+            className='search-button'
+            type='button'
+            onClick={() => {
+              queryBooks(document.getElementById('search').value);
+            }}
+          >
+            Search
+          </button> */}
+        </form>
+        <div className='centered'>
+          <Form.Label htmlFor='search'></Form.Label>
+          <Form.Control
+            type='search'
+            id='seaRCH'
+            aria-describedby='passwordHelpBlock'
+            placeholder='search for books...'
+            style={{ boxShadow: '3px 3px 5px gray' }}
+          />
+          <button
+            className=' centered search-button'
+            type='button'
+            onClick={() => {
+              queryBooks(document.getElementById('seaRCH').value);
+            }}
+          >
+            <img src={searchImg} style ={{maxWidth:'5em'}} alt='' />
+          </button>
+        </div>
+        {/* <Form.Text id='passwordHelpBlock' muted>
+        
+        </Form.Text> */}
 
-    <div className='searchBody'>
-
-      <h1 className='searchbar'>Search for a book!</h1>
-      <form className='searchbar'>
-        <input type='text' id="search" placeholder='My favorite title'></input>
-        <button className='search-button' type='button' onClick={() => { queryBooks(document.getElementById('search').value) }}>Search</button>
-      </form>
-
-
-
-      <div className='favorite_books'>
-        <div className="card text-center">
-          <div className="card-body">
-            <h3 className="card-title">Results</h3>
-            <p className="card-text"></p>
-            {books}
+        <div className='favorite_books'>
+          <div className='card text-center'>
+            <div className='card-body'>
+              <h3 className='card-title'>Results</h3>
+              <p className='card-text'></p>
+              {books}
+            </div>
           </div>
         </div>
       </div>
-
     </div>
-
-
-
-
-
-
-  )
+  );
 
 }

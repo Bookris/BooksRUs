@@ -55,29 +55,14 @@ export default function () {
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
       <div className='container-fluid'>
-        {/* <a className="navbar-brand">Navbar</a>
-        <button onClick={() => {
-          logoutUser(user);
-          navigate("/auth/login", { replace: true });
-        }}>Logout</button>
-        <button onClick={() => navigate("/profile", { replace: true })}>Profile</button>
-        <button onClick={() => navigate('/search', { replace: true })}>Search</button> */}
-        {/* <div class="collapse navbar-collapse" id="navbarNav">
-          <a onClick={() => {
-            logoutUser(user);
-            navigate("/auth/login", { replace: true });
-          }}>Logout</a>
-          <a onClick={() => navigate("/profile", { replace: true })}>Profile</a>
-          <a onClick={() => navigate('/search', { replace: true })}>Search</a>
-        </div> */}
-
         <a
           className='navbar-brand'
           onClick={() => navigate('/profile', { replace: true })}
         >
           Home
         </a>
-        <button
+
+        {/* <button
           className='navbar-toggler'
           type='button'
           data-bs-toggle='collapse'
@@ -87,10 +72,40 @@ export default function () {
           aria-label='Toggle navigation'
         >
           <span className='navbar-toggler-icon'></span>
-        </button>
-        <div className='collapse navbar-collapse' id='navbarNav'>
+        </button> */}
+        <div
+          className='collapse navbar-collapse'
+          id='navbarNav'
+          style={{ color: '#BABDCF !important;' }}
+        >
           <ul className='navbar-nav'>
             {userButton}
+
+            <li className='nav-item'>
+              <a
+                className='nav-link'
+                onClick={() => {
+                  if (isLogged) {
+                    navigate('/search');
+                  }
+                }}
+              >
+                Search
+              </a>
+            </li>
+
+            <li className='nav-item'>
+              <a
+                className='nav-link'
+                onClick={() => {
+                  if (isLogged) {
+                    navigate('/cart');
+                  }
+                }}
+              >
+                <span class='material-symbols-outlined'>shopping_cart</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
