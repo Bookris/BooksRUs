@@ -7,6 +7,8 @@ import store from '../store';
 export default function Profile() {
   let navigate = useNavigate();
   const [isLoaded, setLoaded] = React.useState(false);
+  const isLogged = useStoreState((state) => state.isLogged);
+  const setIsLogged = useStoreActions((actions) => actions.setIsLogged);
   const [books, setBooks] = React.useState([])
   const user = useStoreState((state) => state.user);
   const updateUser = useStoreActions((actions) => actions.updateUser);
@@ -17,15 +19,15 @@ export default function Profile() {
     if (!isLoaded) {
       fetch('/authorized')
       .then((data) => {
-        console.log('I AM THE FIRST THEN ', data)
       return data.json()})
-      .then((data) => {
+      .then(async (data) => {
         if (data) {
-          console.log("last .then data: ", data)
           setLoaded(true);
+          setIsLogged(true);
           updateUser({
             username: data.username,
             email: data.email,
+            likedBooks: data.likedBooks,
             picture: data.picture,
           });
           
@@ -35,6 +37,7 @@ export default function Profile() {
         }
         return data.email
       }).then(data=> {
+        if (data) {
         fetch('/books/allLiked', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -52,6 +55,7 @@ export default function Profile() {
               navigate('/');
             }
           });
+        }
       })
     }   
   }, []);

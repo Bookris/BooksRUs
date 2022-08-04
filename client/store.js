@@ -17,11 +17,18 @@ const store = createStore({
     state.user = {
       likedBooks: []
     };
+    state.isLogged = false;
   }),
   // userLikedBooks: [],
   updateLikedBooks: action((state, payload) => {
     console.log('payload: ', payload);
     state.user.likedBooks = payload;
+  }),
+  isLogged: false,
+  setIsLogged: action((state, payload) => {
+    console.log("LOGGED PAYLOAD: ",payload)
+    state.isLogged = payload;
+    console.log('STATE LOGGED: ',state.isLogged)
   })
 }, // model
   { devTools: true } //config
