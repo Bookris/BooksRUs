@@ -48,6 +48,7 @@ module.exports = {
       '/books': 'http://localhost:3000',
       '/test': 'http://localhost:3000',
       '/authorized': 'http://localhost:3000',
+      '/deauthorized': 'http://localhost:3000',
       '/oauth': 'http://localhost:3000'
      },
     // proxy: { '/test/': 'http://localhost:3000' }, 
