@@ -7,6 +7,8 @@ import store from '../store';
 export default function Profile() {
   let navigate = useNavigate();
   const [isLoaded, setLoaded] = React.useState(false);
+  const isLogged = useStoreState((state) => state.isLogged);
+  const setIsLogged = useStoreActions((actions) => actions.setIsLogged);
   const user = useStoreState((state) => state.user);
   const updateUser = useStoreActions((actions) => actions.updateUser);
   console.log('USER: ', user);
@@ -14,15 +16,15 @@ export default function Profile() {
     if (!isLoaded) {
       fetch('/authorized')
       .then((data) => {
-        console.log('I AM THE FIRST THEN ', data)
       return data.json()})
       .then((data) => {
         if (data) {
-          console.log("last .then data: ", data)
           setLoaded(true);
+          setIsLogged(true);
           updateUser({
             username: data.username,
             email: data.email,
+            likedBooks: data.likedBooks,
           });
         } else {
           console.log('USER NOT FOUND RETURNING', data);

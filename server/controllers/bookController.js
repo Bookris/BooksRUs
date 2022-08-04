@@ -60,6 +60,8 @@ bookController.unLike = async (req, res, next) => {
   (isbn === 'Not Found') ? foundBook = await Book.findOne({ name: title }) : foundBook = await Book.findOne({ isbn: isbn });
   if (!foundBook) next({ message: { err: 'err finding books in removing book from likes' } })
 
+  console.log("FOUND BOOK TITLE: ", foundBook.name);
+  console.log("FOUND BOOK ID: ", foundBook.id);
   await User.findOneAndUpdate({ email: email }, { $pull: { likedBooks: foundBook.id } }).exec()
     .then(data => {
       console.log('Found and updated: ', data)

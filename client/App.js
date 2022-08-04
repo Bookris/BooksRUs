@@ -17,8 +17,18 @@ function App() {
   const updateUser = useStoreActions((actions) => actions.updateUser);
   // we will need to store this in our global state -- @johnny can use easy-peasy here
   const [user, setUser] = useState({});
+  const isLogged = useStoreState(state => state.isLogged);
   let navigate = useNavigate();
   // let navigate = useNavigate() react hook
+  if (isLogged) { 
+    console.log('navigating...')
+    useEffect(() => {
+      navigate('/profile') 
+    })
+    return (
+      <div>Loading...</div>
+    )
+  }
   async function handleCallbackResponse(response) {
     console.log('encoded JWT ID token' + response.credential);
     // look to potentially save response.credential in order to track logged in user

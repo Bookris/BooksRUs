@@ -6,7 +6,7 @@ import '/client/assets/styles.scss';
 export default function Login() {
   const user = useStoreState((state) => state.user);
   const updateUser = useStoreActions((actions) => actions.updateUser);
-
+  const isLogged = useStoreState((state) => state.isLogged);
   let navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -24,6 +24,7 @@ export default function Login() {
       //tell user that login credentials were wrong
       console.log('invalid credentials');
     } else {
+      console.log('LOG IN DATA: ',data);
       updateUser(data); //updates our global state
       navigate('/profile', { replace: true }); //navigates to profile if login was successful
     }
