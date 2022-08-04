@@ -37,8 +37,12 @@ userController.register = async (req, res, next) => {
   if (req.body.password) {
     password = req.body.password
   }
+  let picture = '';
+  if (req.body.picture) {
+    picture = req.body.picture
+  }
   const { email } = req.body;
-  const user = await User.create({ username: username, email: email, password: password })
+  const user = await User.create({ username: username, email: email, password: password, picture: picture })
     // .then((res) => { console.log('user registered!!!!!!'); return next() })
     // .catch((err) => next({ message: { err: 'user registered err' } }));
 

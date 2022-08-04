@@ -70,6 +70,9 @@ const userSchema = new mongoose.Schema({  // username, password, friends, commen
     type: String,
     // required: true
   },
+  picture: {
+    type: String,
+  },
   friends: [],
   comments: [{
     type: Schema.Types.ObjectId,

@@ -36,7 +36,7 @@ app.use('/test', (req, res) => {
   res.redirect('/search');
 })
 
-app.use('/authorized', (req, res, next) => {console.log("IM HERE"); return next()}, sessionController.isLoggedIn, (req, res) => {
+app.use('/authorized', sessionController.isLoggedIn, (req, res) => {
   // if (res.locals.session) {
   //   // render profile page
   //   console.log('I AM FROM THE /authorized GET REQUEST', res.locals.session)
@@ -50,6 +50,11 @@ app.use('/authorized', (req, res, next) => {console.log("IM HERE"); return next(
   console.log('I AM RES',res.locals.session)
   return res.status(200).json(res.locals.session);
 });
+
+app.use('/deauthorized', sessionController.endSession, (req, res) => {
+  console.log("DEAUTHORIZED!!")
+  return res.status(200).json(res.locals.deleted);
+})
 
 // non-existing page err handler
 app.use((req, res) =>
