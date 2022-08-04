@@ -4,7 +4,27 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 export default function () {
   const user = useStoreState((state) => state.user);
   const logoutUser = useStoreActions((actions) => actions.logout);
+  const updateUser = useStoreActions((actions) => actions.updateUser);
   let navigate = useNavigate();
+
+  const onLogoutClick = async() => {
+    logoutUser(user);
+    console.log("about to logout")
+    const data = await fetch('/deauthorized', {
+      method: 'DELETE'
+    })
+    console.log("data: ", data)
+    const json = await data.json()
+    console.log("JSON: ", json);
+    if (json) {
+      updateUser({
+        username: '',
+        email: '',
+        picture: ''
+      });
+    } 
+    navigate('/', { replace: true });
+  }
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
       <div className='container-fluid'>
@@ -64,10 +84,7 @@ export default function () {
             <li className='nav-item'>
               <a
                 className='nav-link'
-                onClick={() => {
-                  logoutUser(user);
-                  navigate('/', { replace: true });
-                }}
+                onClick={onLogoutClick}
               >
                 Logout
               </a>

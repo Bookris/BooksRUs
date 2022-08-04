@@ -57,4 +57,23 @@ sessionController.startSession = async (req, res, next) => {
   return next();
 };
 
+sessionController.endSession = async (req, res, next) => {
+  console.log("ENDING SESSION")
+  try {
+    // get SSID from req cookie
+    const {ssid} = req.cookies
+
+    // create Session with SSID
+    // const dbRes = await User.create({ username, password });
+    const dbRes = await Session.deleteOne({ cookieId: ssid });
+    console.log(`deleteSession() DB Response ${dbRes}`);
+    res.locals.deleted = false;
+    if (dbRes.deletedCount >= 1) res.locals.deleted = true;
+  } catch (err) {
+    console.log(`deleteSession() ERROR: ${err}`);
+  }
+
+  return next();
+}
+
 module.exports = sessionController;
