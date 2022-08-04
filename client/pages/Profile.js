@@ -28,39 +28,38 @@ export default function Profile() {
             email: data.email,
             picture: data.picture,
           });
+          
         } else {
           console.log('USER NOT FOUND RETURNING', data);
           navigate('/')
         }
+        return data.email
+      }).then(data=> {
+        fetch('/books/allLiked', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data) {
+              console.log('last .then data: ', data);
+              setBooks(data);
+            } else {
+              console.log('USER NOT FOUND RETURNING', data);
+              navigate('/');
+            }
+          });
       })
     }   
   }, []);
 
- 
-   React.useEffect(() => {
-console.log('I AM THE USER EMAIL', user.email)
-       fetch('/books/allLiked',{
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user.email }),
-    })
-         .then((res) => {
-          
-           return res.json();
-         })
-         .then((data) => {
-           if (data) {
-             console.log('last .then data: ', data);
-             setBooks(data);
-             
-           } else {
-             console.log('USER NOT FOUND RETURNING', data);
-             navigate('/');
-           }
-         });
+
+       
      
-   }, []);
-  
+ 
 
 
   if (isLoaded) {
