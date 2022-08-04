@@ -5,8 +5,11 @@ export default function () {
   const user = useStoreState((state) => state.user);
   const logoutUser = useStoreActions((actions) => actions.logout);
   const updateUser = useStoreActions((actions) => actions.updateUser);
+  const isLogged = useStoreState(state => state.isLogged);
   let navigate = useNavigate();
+  let userButton;
 
+ 
   const onLogoutClick = async() => {
     logoutUser(user);
     console.log("about to logout")
@@ -24,6 +27,30 @@ export default function () {
       });
     } 
     navigate('/', { replace: true });
+  }
+
+  if (!isLogged) {
+    userButton = <li className='nav-item'>
+    <a
+      className='nav-link active'
+      aria-current='page'
+      onClick={() => {
+        // logoutUser(user);
+        navigate('/', { replace: true });
+      }}
+    >
+      Login
+    </a>
+  </li>
+  } else {
+    userButton = <li className='nav-item'>
+    <a
+      className='nav-link'
+      onClick={onLogoutClick}
+    >
+      Logout
+    </a>
+  </li>
   }
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
@@ -63,27 +90,7 @@ export default function () {
         </button>
         <div className='collapse navbar-collapse' id='navbarNav'>
           <ul className='navbar-nav'>
-            <li className='nav-item'>
-              <a
-                className='nav-link active'
-                aria-current='page'
-                onClick={() => {
-                  logoutUser(user);
-                  navigate('/', { replace: true });
-                }}
-              >
-                Login
-              </a>
-            </li>
-
-            <li className='nav-item'>
-              <a
-                className='nav-link'
-                onClick={onLogoutClick}
-              >
-                Logout
-              </a>
-            </li>
+            {userButton}
           </ul>
         </div>
       </div>

@@ -20,15 +20,16 @@ function App() {
   const isLogged = useStoreState(state => state.isLogged);
   let navigate = useNavigate();
   // let navigate = useNavigate() react hook
-  if (isLogged) { 
-    console.log('navigating...')
-    useEffect(() => {
-      navigate('/profile') 
-    })
-    return (
-      <div>Loading...</div>
-    )
-  }
+  // console.log(isLogged);
+  // if (isLogged) { 
+  //   console.log('navigating...')
+  //   useEffect(() => {
+  //     navigate('/profile') 
+  //   })
+  //   return (
+  //     <div>Loading...</div>
+  //   )
+  // }
   async function handleCallbackResponse(response) {
     console.log('encoded JWT ID token' + response.credential);
     // look to potentially save response.credential in order to track logged in user

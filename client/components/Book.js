@@ -29,7 +29,12 @@ export default function Book(props) {
   }
   console.log('props.book.volumeInfo.infoLink');
   // shortening description return string in search
-  const descriptionStr = props.book.volumeInfo.description.substring(0, 250);
+  let descriptionStr
+  if (!props.book.volumeInfo.description) {
+    descriptionStr = ''
+  } else {
+    props.book.volumeInfo.description.length < 250 ? descriptionStr = props.book.volumeInfo.description : descriptionStr = props.book.volumeInfo.description.substring(0, 250);
+  }
 
   const bookData = {
     name: props.book.volumeInfo.title,

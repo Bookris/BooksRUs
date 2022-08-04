@@ -20,7 +20,7 @@ export default function Profile() {
       fetch('/authorized')
       .then((data) => {
       return data.json()})
-      .then((data) => {
+      .then(async (data) => {
         if (data) {
           setLoaded(true);
           setIsLogged(true);
@@ -37,6 +37,7 @@ export default function Profile() {
         }
         return data.email
       }).then(data=> {
+        if (data) {
         fetch('/books/allLiked', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -54,6 +55,7 @@ export default function Profile() {
               navigate('/');
             }
           });
+        }
       })
     }   
   }, []);

@@ -17,6 +17,7 @@ const store = createStore({
     state.user = {
       likedBooks: []
     };
+    state.isLogged = false;
   }),
   // userLikedBooks: [],
   updateLikedBooks: action((state, payload) => {

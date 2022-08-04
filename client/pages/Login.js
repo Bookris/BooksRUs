@@ -9,6 +9,7 @@ export default function Login() {
   const isLogged = useStoreState((state) => state.isLogged);
   let navigate = useNavigate();
 
+  
   async function handleSubmit(event) {
     event.preventDefault();
     // request to /auth/login
