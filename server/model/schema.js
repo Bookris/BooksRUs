@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { schema } = require("webpack-dev-server");
-const MONGO_URI = `mongodb+srv://hmu1540:Gt7130mhm%40%40@cluster0.8mkig.mongodb.net/?retryWrites=true&w=majority`;
+const MONGO_URI = <your mongoDB URI>;
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI
   useNewUrlParser: true,
